@@ -57,6 +57,7 @@ public class chest extends JavaPlugin implements Listener {
             String s = x + y + z + worldC + item + meta;
             list.add(s);
         }
+        getConfig().set("Chests", list);
         saveConfig();
     }
 

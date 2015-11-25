@@ -5,9 +5,4 @@ out
 
 *.class
 
-.mtj.tmp/
-
-*.jar
-*.war
-*.ear
 
