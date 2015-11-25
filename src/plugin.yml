@@ -1,0 +1,6 @@
+name: InfChest
+main: net.lapismc.inf.chest
+version: 0.1
+permissions:
+InfChest.use:
+    description: Allows Players To Create And Destory Infinite Chests
