@@ -14,9 +14,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Benjamin on 24/11/2015.
- */
 public class chest extends JavaPlugin implements Listener {
     public HashMap<Location, ItemStack> chests = new HashMap<>();
 
@@ -70,7 +67,7 @@ public class chest extends JavaPlugin implements Listener {
                 for (Location loc : chests.keySet()) {
                     ItemStack i = chests.get(loc);
                     Chest chest = (Chest) loc.getBlock().getState();
-                    if (!chest.getBlockInventory().contains(i, 64)) {
+                    if (!chest.getBlockInventory().contains(i, 2)) {
                         i.setAmount(64);
                         chest.getBlockInventory().addItem(i);
                     }
