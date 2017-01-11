@@ -19,10 +19,10 @@ public class chest extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        this.saveDefaultConfig();
-        this.loadChests();
+        saveDefaultConfig();
+        loadChests();
         Bukkit.getPluginManager().registerEvents(this, this);
-        this.startRunning();
+        startRunning();
     }
 
     public void loadChests() {
@@ -40,7 +40,7 @@ public class chest extends JavaPlugin implements Listener {
             Location location = new Location(world, x, y, z);
             ItemStack i = new ItemStack(Material.getMaterial(item));
             i.setDurability(meta);
-            this.chests.put(location, i);
+            chests.put(location, i);
         }
     }
 
@@ -48,8 +48,8 @@ public class chest extends JavaPlugin implements Listener {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
             public synchronized void run() {
-                for (Location loc : chest.this.chests.keySet()) {
-                    ItemStack i = chest.this.chests.get(loc);
+                for (Location loc : chests.keySet()) {
+                    ItemStack i = chests.get(loc);
                     if (loc.getChunk().isLoaded()) {
                         Chest chest = (Chest) loc.getBlock().getState();
                         if (!chest.getBlockInventory().contains(i, 2)) {
@@ -81,7 +81,7 @@ public class chest extends JavaPlugin implements Listener {
                     i = new ItemStack(Material.getMaterial(Integer.parseInt(s)));
                 }
                 Location loc = e.getBlockPlaced().getLocation();
-                this.chests.put(loc, i);
+                chests.put(loc, i);
                 e.getPlayer().sendMessage(ChatColor.GOLD + "This Chest Will Now Always Output "
                         + i.getType().name().replace("_", " ").toLowerCase() + "'s");
                 Double x = loc.getX();
@@ -91,18 +91,18 @@ public class chest extends JavaPlugin implements Listener {
                 Integer item = i.getTypeId();
                 short meta = i.getDurability();
                 String string = x + ":" + y + ":" + z + ":" + worldC + ":" + item + ":" + meta;
-                List<String> l = this.getConfig().getStringList("Chests");
+                List<String> l = getConfig().getStringList("Chests");
                 l.add(string);
-                this.getConfig().set("Chests", l);
-                this.saveConfig();
-                this.loadChests();
+                getConfig().set("Chests", l);
+                saveConfig();
+                loadChests();
             }
         }
     }
 
     @EventHandler
     public void playerInteractEvent(PlayerInteractEvent e) {
-        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && this.chests.containsKey(e.getClickedBlock().getLocation())) {
+        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && chests.containsKey(e.getClickedBlock().getLocation())) {
             e.getPlayer().sendMessage(ChatColor.RED + "That Is An Infinite Chest And Cannot Be Accessed!");
             e.setCancelled(true);
         }
@@ -110,18 +110,18 @@ public class chest extends JavaPlugin implements Listener {
 
     @EventHandler
     public void blockBreakEvent(BlockBreakEvent e) {
-        if (this.chests.containsKey(e.getBlock().getLocation())) {
+        if (chests.containsKey(e.getBlock().getLocation())) {
             if (!e.getPlayer().hasPermission("InfChest.use")) {
                 e.getPlayer().sendMessage("You Don't Have Permission To Do That!");
                 e.setCancelled(true);
                 return;
             }
-            this.chests.remove(e.getBlock().getLocation());
+            chests.remove(e.getBlock().getLocation());
             e.getPlayer().sendMessage(ChatColor.GOLD + "Infinite Chest Removed");
             Chest chest = (Chest) e.getBlock().getState();
             chest.getBlockInventory().clear();
             Location loc = e.getBlock().getLocation();
-            ItemStack i = this.chests.get(loc);
+            ItemStack i = chests.get(loc);
             Double x = loc.getX();
             Double y = loc.getY();
             Double z = loc.getZ();
@@ -129,11 +129,11 @@ public class chest extends JavaPlugin implements Listener {
             Integer item = i.getTypeId();
             short meta = i.getDurability();
             String string = x + ":" + y + ":" + z + ":" + worldC + ":" + item + ":" + meta;
-            List<String> l = this.getConfig().getStringList("Chests");
+            List<String> l = getConfig().getStringList("Chests");
             l.remove(string);
-            this.getConfig().set("Chests", l);
-            this.saveConfig();
-            this.loadChests();
+            getConfig().set("Chests", l);
+            saveConfig();
+            loadChests();
         }
     }
 
