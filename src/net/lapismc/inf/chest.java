@@ -66,7 +66,8 @@ public class chest extends JavaPlugin implements Listener {
     public void blockPlaceEvent(BlockPlaceEvent e) {
         if (e.getBlockPlaced().getType() == Material.CHEST || e.getBlockPlaced().getType() == Material.TRAPPED_CHEST) {
             Chest chest = (Chest) e.getBlockPlaced().getState();
-            if (e.getItemInHand().getItemMeta().getDisplayName().startsWith("Inf ")) {
+            if (e.getItemInHand().hasItemMeta() &&
+                    e.getItemInHand().getItemMeta().getDisplayName().startsWith("Inf ")) {
                 if (!e.getPlayer().hasPermission("InfChest.use")) {
                     return;
                 }
