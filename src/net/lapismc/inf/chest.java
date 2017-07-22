@@ -14,8 +14,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.HashMap;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class chest extends JavaPlugin implements Listener {
-    public HashMap<Location, ItemStack> chests = new HashMap<>();
+
+    private HashMap<Location, ItemStack> chests = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -25,7 +27,7 @@ public class chest extends JavaPlugin implements Listener {
         startRunning();
     }
 
-    public void loadChests() {
+    private void loadChests() {
         this.reloadConfig();
         List<String> list = this.getConfig().getStringList("Chests");
         for (String s : list) {
@@ -44,7 +46,7 @@ public class chest extends JavaPlugin implements Listener {
         }
     }
 
-    public void startRunning() {
+    private void startRunning() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
             public synchronized void run() {
@@ -53,7 +55,7 @@ public class chest extends JavaPlugin implements Listener {
                     if (loc.getChunk().isLoaded()) {
                         Chest chest = (Chest) loc.getBlock().getState();
                         if (!chest.getBlockInventory().contains(i, 2)) {
-                            i.setAmount(64);
+                            i.setAmount(i.getMaxStackSize());
                             chest.getBlockInventory().addItem(i);
                         }
                     }
@@ -65,7 +67,6 @@ public class chest extends JavaPlugin implements Listener {
     @EventHandler
     public void blockPlaceEvent(BlockPlaceEvent e) {
         if (e.getBlockPlaced().getType() == Material.CHEST || e.getBlockPlaced().getType() == Material.TRAPPED_CHEST) {
-            Chest chest = (Chest) e.getBlockPlaced().getState();
             if (e.getItemInHand().hasItemMeta() &&
                     e.getItemInHand().getItemMeta().getDisplayName().startsWith("Inf ")) {
                 if (!e.getPlayer().hasPermission("InfChest.use")) {
