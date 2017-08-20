@@ -1,5 +1,5 @@
 name: InfChest
-main: net.lapismc.inf.chest
+main: net.lapismc.infchestchest.chest
 version: 1.0.0
 permissions:
 InfChest.use:

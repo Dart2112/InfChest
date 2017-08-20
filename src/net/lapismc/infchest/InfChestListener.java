@@ -1,6 +1,9 @@
-package net.lapismc.inf;
+package net.lapismc.infchest;
 
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Chest;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,59 +12,17 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class chest extends JavaPlugin implements Listener {
+public class InfChestListener implements Listener {
 
-    private HashMap<Location, ItemStack> chests = new HashMap<>();
+    private InfChest plugin;
 
-    @Override
-    public void onEnable() {
-        saveDefaultConfig();
-        loadChests();
-        Bukkit.getPluginManager().registerEvents(this, this);
-        startRunning();
-    }
-
-    private void loadChests() {
-        this.reloadConfig();
-        List<String> list = this.getConfig().getStringList("Chests");
-        for (String s : list) {
-            String[] split = s.split(":");
-            Double x = Double.parseDouble(split[0]);
-            Double y = Double.parseDouble(split[1]);
-            Double z = Double.parseDouble(split[2]);
-            String worldC = split[3];
-            Integer item = Integer.parseInt(split[4]);
-            short meta = Short.parseShort(split[5]);
-            World world = Bukkit.getWorld(worldC);
-            Location location = new Location(world, x, y, z);
-            ItemStack i = new ItemStack(Material.getMaterial(item));
-            i.setDurability(meta);
-            chests.put(location, i);
-        }
-    }
-
-    private void startRunning() {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-            @Override
-            public synchronized void run() {
-                for (Location loc : chests.keySet()) {
-                    ItemStack i = chests.get(loc);
-                    if (loc.getChunk().isLoaded()) {
-                        Chest chest = (Chest) loc.getBlock().getState();
-                        if (!chest.getBlockInventory().contains(i, 2)) {
-                            i.setAmount(i.getMaxStackSize());
-                            chest.getBlockInventory().addItem(i);
-                        }
-                    }
-                }
-            }
-        }, 20, 20);
+    InfChestListener(InfChest plugin) {
+        this.plugin = plugin;
+        Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
@@ -83,7 +44,7 @@ public class chest extends JavaPlugin implements Listener {
                     i = new ItemStack(Material.getMaterial(Integer.parseInt(s)));
                 }
                 Location loc = e.getBlockPlaced().getLocation();
-                chests.put(loc, i);
+                plugin.chests.put(loc, i);
                 e.getPlayer().sendMessage(ChatColor.GOLD + "This Chest Will Now Always Output "
                         + i.getType().name().replace("_", " ").toLowerCase() + "'s");
                 Double x = loc.getX();
@@ -93,18 +54,18 @@ public class chest extends JavaPlugin implements Listener {
                 Integer item = i.getTypeId();
                 short meta = i.getDurability();
                 String string = x + ":" + y + ":" + z + ":" + worldC + ":" + item + ":" + meta;
-                List<String> l = getConfig().getStringList("Chests");
+                List<String> l = plugin.getConfig().getStringList("Chests");
                 l.add(string);
-                getConfig().set("Chests", l);
-                saveConfig();
-                loadChests();
+                plugin.getConfig().set("Chests", l);
+                plugin.saveConfig();
+                plugin.loadChests();
             }
         }
     }
 
     @EventHandler
     public void playerInteractEvent(PlayerInteractEvent e) {
-        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && chests.containsKey(e.getClickedBlock().getLocation())) {
+        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && plugin.chests.containsKey(e.getClickedBlock().getLocation())) {
             e.getPlayer().sendMessage(ChatColor.RED + "That Is An Infinite Chest And Cannot Be Accessed!");
             e.setCancelled(true);
         }
@@ -112,18 +73,18 @@ public class chest extends JavaPlugin implements Listener {
 
     @EventHandler
     public void blockBreakEvent(BlockBreakEvent e) {
-        if (chests.containsKey(e.getBlock().getLocation())) {
+        if (plugin.chests.containsKey(e.getBlock().getLocation())) {
             if (!e.getPlayer().hasPermission("InfChest.use")) {
                 e.getPlayer().sendMessage("You Don't Have Permission To Do That!");
                 e.setCancelled(true);
                 return;
             }
-            chests.remove(e.getBlock().getLocation());
+            plugin.chests.remove(e.getBlock().getLocation());
             e.getPlayer().sendMessage(ChatColor.GOLD + "Infinite Chest Removed");
             Chest chest = (Chest) e.getBlock().getState();
             chest.getBlockInventory().clear();
             Location loc = e.getBlock().getLocation();
-            ItemStack i = chests.get(loc);
+            ItemStack i = plugin.chests.get(loc);
             Double x = loc.getX();
             Double y = loc.getY();
             Double z = loc.getZ();
@@ -131,11 +92,11 @@ public class chest extends JavaPlugin implements Listener {
             Integer item = i.getTypeId();
             short meta = i.getDurability();
             String string = x + ":" + y + ":" + z + ":" + worldC + ":" + item + ":" + meta;
-            List<String> l = getConfig().getStringList("Chests");
+            List<String> l = plugin.getConfig().getStringList("Chests");
             l.remove(string);
-            getConfig().set("Chests", l);
-            saveConfig();
-            loadChests();
+            plugin.getConfig().set("Chests", l);
+            plugin.saveConfig();
+            plugin.loadChests();
         }
     }
 
