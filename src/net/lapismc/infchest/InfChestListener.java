@@ -48,10 +48,10 @@ public class InfChestListener implements Listener {
                 e.getPlayer().sendMessage(ChatColor.GOLD + "This Chest Will Now Always Output "
                         + i.getType().name().replace("_", " ").toLowerCase() + "'s");
                 Double x = loc.getX();
-                Double y = loc.getY();
-                Double z = loc.getZ();
+                double y = loc.getY();
+                double z = loc.getZ();
                 String worldC = loc.getWorld().getName();
-                Integer item = i.getTypeId();
+                int item = i.getTypeId();
                 short meta = i.getDurability();
                 String string = x + ":" + y + ":" + z + ":" + worldC + ":" + item + ":" + meta;
                 List<String> l = plugin.getConfig().getStringList("Chests");
@@ -85,11 +85,11 @@ public class InfChestListener implements Listener {
             chest.getBlockInventory().clear();
             Location loc = e.getBlock().getLocation();
             ItemStack i = plugin.chests.get(loc);
-            Double x = loc.getX();
-            Double y = loc.getY();
-            Double z = loc.getZ();
+            double x = loc.getX();
+            double y = loc.getY();
+            double z = loc.getZ();
             String worldC = loc.getWorld().getName();
-            Integer item = i.getTypeId();
+            int item = i.getTypeId();
             short meta = i.getDurability();
             String string = x + ":" + y + ":" + z + ":" + worldC + ":" + item + ":" + meta;
             List<String> l = plugin.getConfig().getStringList("Chests");

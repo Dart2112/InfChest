@@ -1,19 +1,19 @@
 package net.lapismc.infchest;
 
+import net.lapismc.lapiscore.LapisCorePlugin;
+import net.lapismc.lapiscore.utils.CompatibleMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Chest;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class InfChest extends JavaPlugin implements Listener {
+public class InfChest extends LapisCorePlugin implements Listener {
 
     HashMap<Location, ItemStack> chests = new HashMap<>();
 
@@ -30,15 +30,16 @@ public class InfChest extends JavaPlugin implements Listener {
         List<String> list = this.getConfig().getStringList("Chests");
         for (String s : list) {
             String[] split = s.split(":");
-            Double x = Double.parseDouble(split[0]);
-            Double y = Double.parseDouble(split[1]);
-            Double z = Double.parseDouble(split[2]);
+            double x = Double.parseDouble(split[0]);
+            double y = Double.parseDouble(split[1]);
+            double z = Double.parseDouble(split[2]);
             String worldC = split[3];
-            Integer item = Integer.parseInt(split[4]);
+            int item = Integer.parseInt(split[4]);
             short meta = Short.parseShort(split[5]);
             World world = Bukkit.getWorld(worldC);
             Location location = new Location(world, x, y, z);
-            ItemStack i = new ItemStack(Material.getMaterial(item));
+            byte b = 0;
+            ItemStack i = new ItemStack(CompatibleMaterial.matchXMaterial(item, b).parseItem());
             i.setDurability(meta);
             chests.put(location, i);
         }
