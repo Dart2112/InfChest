@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e686b0e8-3561-4a29-a8e4-2a1de8fc409f" name="Default" comment="Add idea files&#10;Update LapisCore and Spigot">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/lapismc/infchest/InfChest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/lapismc/infchest/InfChest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/lapismc/infchest/InfChestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/lapismc/infchest/InfChestListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +21,7 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIEW_PUSH_ON_COMMIT_AND_PUSH" value="false" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
@@ -34,22 +32,6 @@
     </option>
   </component>
   <component name="ProjectId" id="1USaxkW2e4Ak2JzbYQuCxYfy4Gz" />
-  <component name="ProjectInspectionProfilesVisibleTreeState">
-    <entry key="Project Default">
-      <profile-state>
-        <expanded-state>
-          <State>
-            <id />
-          </State>
-        </expanded-state>
-        <selected-state>
-          <State>
-            <id>Android</id>
-          </State>
-        </selected-state>
-      </profile-state>
-    </entry>
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -65,7 +47,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
@@ -329,7 +311,7 @@
       <workItem from="1500703943251" duration="352000" />
       <workItem from="1503194611097" duration="3486000" />
       <workItem from="1575352700927" duration="554000" />
-      <workItem from="1579751956630" duration="511000" />
+      <workItem from="1579751956630" duration="537000" />
     </task>
     <task id="LOCAL-00001" summary="some changes + pom.xml">
       <created>1484139663157</created>
@@ -359,7 +341,14 @@
       <option name="project" value="LOCAL" />
       <updated>1503202448293</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add idea files&#10;Update LapisCore and Spigot">
+      <created>1579752479036</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1579752479036</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,7 +363,8 @@
     <MESSAGE value="some fixes" />
     <MESSAGE value="Made sure that it cant make a stack too large" />
     <MESSAGE value="Spreading it all out a bit and redoing names" />
-    <option name="LAST_COMMIT_MESSAGE" value="Spreading it all out a bit and redoing names" />
+    <MESSAGE value="Add idea files&#10;Update LapisCore and Spigot" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add idea files&#10;Update LapisCore and Spigot" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -384,10 +374,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2338" y="197" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/1920.0.1920.1080@1920.0.1920.1080" timestamp="1575352844024" />
-    <state x="2506" y="121" width="738" height="801" key="CommitChangelistDialog2" timestamp="1579752466877">
+    <state x="2506" y="121" width="738" height="801" key="CommitChangelistDialog2" timestamp="1579752478778">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2506" y="121" width="738" height="801" key="CommitChangelistDialog2/0.0.1920.1050/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579752466877" />
+    <state x="2506" y="121" width="738" height="801" key="CommitChangelistDialog2/0.0.1920.1050/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579752478778" />
     <state width="1878" height="288" key="GridCell.Tab.0.bottom" timestamp="1575353254198">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -404,6 +394,14 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1878" height="288" key="GridCell.Tab.0.right/0.0.1920.1050/1920.0.1920.1080@1920.0.1920.1080" timestamp="1575353254198" />
+    <state x="2376" y="159" key="SettingsEditor" timestamp="1579752493056">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2376" y="159" key="SettingsEditor/0.0.1920.1050/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579752493056" />
+    <state x="2475" y="260" width="800" height="523" key="Vcs.Push.Dialog.v2" timestamp="1579752480742">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2475" y="260" width="800" height="523" key="Vcs.Push.Dialog.v2/0.0.1920.1050/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579752480742" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
